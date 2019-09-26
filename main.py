@@ -205,7 +205,7 @@ class DkrCompose(object):
                 updated_ports = []
                 for port in ports:
                     p1, p2 = port.split(":")
-                    p11 = port_generator.next()
+                    p11 = port_generator.__next__()
                     port2 = "%s:%s" % (p11, p2)
                     updated_ports_map[service]["ports"][p2] = p11
                     updated_ports.append(port2)
@@ -255,7 +255,6 @@ def handle_env_commands(options):
         rpg = RandomPortGenerator().get()
         drp.randomize_ports(base_dir, port_generator=rpg)
     elif(command == "list"):
-        rpg = RandomPortGenerator().get()
         services = drp.list_services(base_dir, keywords)
         for s in services:
             print(s)
